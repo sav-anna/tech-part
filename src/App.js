@@ -1,21 +1,17 @@
-import "./App.css";
-import LoadMore from "./components/LoadMore/LoadMore";
-import TweetList from "./components/TweetList/TweetList";
-import { useFetchUsersQuery } from "./redax/services/users-api";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/HomePage/Home";
+import Tweets from "./pages/TweetsPage/Tweets";
+import Layout from "./components/Layout/Layout";
 
 function App() {
-  const { data } = useFetchUsersQuery();
-  console.log(data);
-
   return (
-    <div>
-      {data?.length > 0 ? (
-        <TweetList users={data} />
-      ) : (
-        <p>There is no tweets...🥺</p>
-      )}
-      <LoadMore />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/tweets" element={<Tweets />} />
+        <Route path="*" element={<p>Path not resolved</p>} />
+      </Route>
+    </Routes>
   );
 }
 export default App;

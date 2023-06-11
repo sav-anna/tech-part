@@ -14,7 +14,7 @@ import storage from "redux-persist/lib/storage";
 import { usersApi } from "./services/users-api";
 
 const persistConfig = {
-  key: "users",
+  key: "page",
   version: 1,
   storage,
 };
