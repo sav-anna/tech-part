@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const usersApi = createApi({
   reducerPath: "usersApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://64836088f2e76ae1b95c648e.mockapi.io/api/v1",
+    baseUrl: "https://64836088f2e76ae1b95c648e.mockapi.io/tweets",
   }),
   tagTypes: ["users"],
   endpoints: (builder) => ({
@@ -12,19 +12,15 @@ export const usersApi = createApi({
       providesTags: ["users"],
     }),
 
-    updateUsers: builder.mutation({
-      query: (id, status, newFollowers) => ({
-        url: `/users/:${id}`,
+    updateUser: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `users/${id}`,
         method: "PUT",
-        body: {
-          id,
-          followers: newFollowers,
-          following: status,
-        },
+        body: patch,
       }),
       invalidatesTags: ["users"],
     }),
   }),
 });
 
-export const { useFetchUsersQuery, useUpdateUsersMutation } = usersApi;
+export const { useFetchUsersQuery, useUpdateUserMutation } = usersApi;
