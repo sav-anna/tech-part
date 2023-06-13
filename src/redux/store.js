@@ -11,21 +11,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { usersApi } from "./services/users-api";
-// import { followSlice } from "./followSlice";
+import { tweetsApi } from "./services/users-api";
 
 const persistConfig = {
   key: "users",
   storage,
-  // whitelist: ["follows"],
 };
 
-const persistedReducer = persistReducer(persistConfig, usersApi.reducer);
+const persistedReducer = persistReducer(persistConfig, tweetsApi.reducer);
 
 export const store = configureStore({
   reducer: {
-    [usersApi.reducerPath]: persistedReducer,
-    // follows: persistedReducer,
+    [tweetsApi.reducerPath]: persistedReducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
@@ -33,7 +30,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-    usersApi.middleware,
+    tweetsApi.middleware,
   ],
 });
 

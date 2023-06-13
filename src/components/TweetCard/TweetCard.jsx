@@ -1,4 +1,4 @@
-import { useUpdateUserMutation } from "../../redax/services/users-api";
+import { useUpdateUserMutation } from "../../redux/services/users-api";
 import css from "./TweetCard.module.css";
 
 const convertNumber = (number) =>
@@ -17,9 +17,9 @@ export const TweetCard = ({ id, avatar, tweets, followers, following }) => {
     updateUser(newFollower);
   };
 
-  const updateUserFollowers = () => {
+  const updateUserFollowers = async () => {
     if (!following) {
-      addFollowers();
+      await addFollowers();
       following = true;
       return;
     }
